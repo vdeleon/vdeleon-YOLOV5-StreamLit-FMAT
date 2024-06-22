@@ -163,7 +163,7 @@ def infer_image(img, size=None):
     return image
 
 
-@st.cache_resource
+@st.experimental_singleton
 def load_model(path, device):
     model_ = torch.hub.load('ultralytics/yolov5', 'custom', path=path, force_reload=True)
     model_.to(device)
@@ -171,7 +171,7 @@ def load_model(path, device):
     return model_
 
 
-@st.cache_resource
+@st.experimental_singleton
 def download_model(url):
     model_file = wget.download(url, out="models")
     return model_file
@@ -199,7 +199,7 @@ def main():
     # global variables
     global model, confidence, cfg_model_path
 
-    st.title("YOLOV5-StreamLit-FMAT")
+    st.title("Object Recognition Dashboard")
 
     st.sidebar.title("Settings")
 
